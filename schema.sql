@@ -1,6 +1,6 @@
 CREATE TABLE dependency_analysis (
-  id SERIAL PRIMARY KEY,
-  project_path TEXT NOT NULL,
-  results JSONB NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    code_snippet TEXT NOT NULL,
+    results JSONB NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSTrim Dependency Analyzer</title>
+    <style>
+        body { font-family: monospace; max-width: 800px; margin: 0 auto; padding: 20px; }
+        textarea { width: 100%; height: 200px; }
+        #result { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>JSTrim Dependency Analyzer</h1>
+    <form id="analyzeForm">
+        <label for="code">Paste your JavaScript code here:</label><br>
+        <textarea id="code" name="code" required></textarea><br>
+        <button type="submit">Analyze Dependencies</button>
+    </form>
+    <h2>Results:</h2>
+    <pre id="result"></pre>
+
+    <script>
+        document.getElementById('analyzeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const code = document.getElementById('code').value;
+            const response = await fetch('/api/analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code }),
+            });
+            const data = await response.json();
+            document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+        });
+    </script>
+</body>
+</html>
